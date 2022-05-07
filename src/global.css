@@ -4,6 +4,24 @@
 
 
 body{
-  @apply text-zinc-100;
+  @apply bg-orange-200 text-zinc-100;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+@layer utilities{
+  .scrollbar::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #000;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: greyw;
+    border-radius: 100vh;
+  }
 }
