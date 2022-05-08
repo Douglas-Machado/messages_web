@@ -24,8 +24,7 @@ export function MyNotes(){
       })
   }, [handleCreateMessage])
 
-  async function handleCreateMessage(e: FormEvent) {
-    console.log(content.length)
+  async function handleCreateMessage(e: FormEvent){
     e.preventDefault()
     
     try{
@@ -46,31 +45,10 @@ export function MyNotes(){
         })
         clear()
       }
-    }catch(e: any){
-      setError(e.response.data.error)
+    }catch(error: any){
+      setError(error.response.data.error)
     }
     
-  }
-
-  function handleEdit(index: number){
-    setTitle(messages[index].title)
-    setContent(messages[index].content)
-    setIndex(index)
-    messagesArray[index] = {title, content}
-
-    handleCreateMessage
-  }
-
-  async function handleDelete(index: number) {
-    try{
-      await api.delete('message', {
-        data: {
-          title: messages[index].title
-        }
-      })
-    }catch(e: any){
-      setError(e.response.data.error)
-    }
   }
 
   function clear(){
@@ -85,7 +63,7 @@ export function MyNotes(){
       className="
       ">
       <header 
-        className="py-4 text-center flex flex-col  bg-purple-700 sm:mx-auto w-3/6 p-3 rounded-[3px]">
+        className="py-4 text-center flex flex-col  bg-purple-700 sm:mx-auto w-2/6 p-3 rounded-[3px]">
         <h1 className="text-2xl text-cyan-300">My Notes</h1>
         {error ? (
           <span className='text-sm w-10/12 text-red-500'>{error}</span>
@@ -104,8 +82,13 @@ export function MyNotes(){
       </header>
       <MessagesList 
         messages={messages}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
+        setTitle={setTitle}
+        setContent={setContent}
+        setIndex={setIndex}
+        messagesArray={messagesArray}
+        title={title}
+        content={content}
+        handleCreateMessage={handleCreateMessage}
       />
     </div>
   )

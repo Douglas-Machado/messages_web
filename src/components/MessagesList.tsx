@@ -1,19 +1,41 @@
 import { Trash, PencilSimple} from 'phosphor-react'
+import { api } from '../services/api';
 import { IMessage } from './MyNotes'
 
 interface IMessagesListProps {
   messages: IMessage[];
-  handleEdit: (index: number) => void;
-  handleDelete: (index: number) => void;
+  setTitle: (e: string) => void;
+  setContent: (e: string) => void;
+  setIndex: (index: number) => void
+  messagesArray: IMessage[];
+  title: string;
+  content: string;
+  handleCreateMessage: (e: any) => void
 }
 
-export function MessagesList({ messages, handleEdit, handleDelete }: IMessagesListProps){
+export function MessagesList(
+  { messages, setTitle, setContent, setIndex, messagesArray, title, content, handleCreateMessage}: IMessagesListProps){
+
+  function handleEdit(index: number){
+    setTitle(messages[index].title)
+    setContent(messages[index].content)
+    setIndex(index)
+    messagesArray[index] = {title, content}
+
+    handleCreateMessage
+  }
+
+  async function handleDelete(index: number) {
+      await api.delete('message', {
+        data: {
+          title: messages[index].title
+        }
+      })
+  }
 
   return(
-    <main 
-        className="
-          flex flex-col sm:mx-auto w-[51%] overflow-x-auto
-          scrollbar scrollbar-thumb-zinc-700 scrollbar-thin"
+    <main className="
+      flex flex-col sm:mx-auto w-[34%] overflow-x-auto scrollbar scrollbar-thumb-zinc-700 scrollbar-thin"
     >
         <ul className="flex flex-col"
         >

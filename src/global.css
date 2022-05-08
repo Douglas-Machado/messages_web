@@ -6,7 +6,6 @@
 body{
   @apply bg-zinc-900 text-zinc-100;
   font-family: 'PT Serif', serif;
-  overflow: hidden;
 }
 
 @layer utilities{
