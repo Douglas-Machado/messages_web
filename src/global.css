@@ -4,8 +4,8 @@
 
 
 body{
-  @apply bg-orange-200 text-zinc-100;
-  font-family: 'Roboto', sans-serif;
+  @apply bg-zinc-900 text-zinc-100;
+  font-family: 'PT Serif', serif;
   overflow: hidden;
 }
 
